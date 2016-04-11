@@ -1,0 +1,71 @@
+\documentclass{article}[12pt]
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage{xy}
+\usepackage{fancyhdr}
+\usepackage[pdftex]{graphicx}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{color}
+\usepackage{thmtools}
+\usepackage{arcs}
+\usepackage{enumitem}
+\usepackage{asymptote}
+\usepackage{hyperref}
+\usepackage{etoolbox}
+
+\makeatletter
+\newcommand\myemail[3]{%                %\newcommand\tpj@compose@mailto[3]{%
+\edef\@tempa{mailto:#1?subject=#2 }%
+\edef\@tempb{\expandafter\html@spaces\@tempa\@empty}%
+\href{\@tempb}{#3}}
+
+\catcode\%=11
+\def\html@spaces#1 #2{#1%20\ifx#2\@empty\else\expandafter\html@spaces\fi#2}
+\catcode\%=14
+\makeatother
+
+\pdfpagewidth 8.5in
+\pdfpageheight 11in
+\oddsidemargin -0.25in
+\textwidth 7in
+\textheight 9in
+\topmargin -1.8in
+\headheight 112pt
+
+\pagestyle{fancy}
+\doublespacing
+
+\title{Random Walk\\Construction Plan}
+\author{Garrett Higginbotham}
+
+\lhead{Random Walk}
+\rhead{Construction Plan}
+
+\lfoot{Property of Garrett Higginbotham.\\Please send any suggestions to \myemail{ghiggie@uab.edu}{Document Suggestions-Random Walk, Construction Plans}{ghiggie@uab.edu}}
+\rfoot{Last Modified: \today}
+
+\begin{document}
+
+\centerline{\Large{Random Walk}}
+\centerline{\Large{Construction Plan}}
+
+\vskip 0.5in
+
+Currently, I am constructing a model of a random walk within a region with other static objects. Below, you will find a plan of how I will proceed with constructing the model.
+
+\begin{description}
+	\item[Version 1] In the initial commit, a model was built to describe a particle beginning at a random location within a region. At each time step, a random direction is selected to describe the direction the particle will take.
+	\item[Version 2] In Version 1, the particle was not constrained to remain in the region, which is a physically unrealistic system. This version removes this issue.
+	\item[Version 3] The previous versions simply displayed the coordinates of the particle at each point in time. This version will provide an animation to illustrate the motion of the particle.
+	\item[Version 4] In this version, the model becomes more complicated. I will add an object to the region. If at any time the particle makes contact with the object, it will stick and the program will terminate.
+	\item[Version 5] This version will extend the number of dimensions to 3, and will add in the ability for the user to adjust the number of particles in the region.
+	\item[Version 6] In Version 5, the capability to adjust the number of particles will have been added to the program. However, it is possible in Version 5 for multiple particles to inhabit the same point of space, a physically unrealistic phenomenon. In order to correct this, the possible directions for the particles must be adjusted to allow a full range of motion. Furthermore, an algorithm will be incorporated in to dictate the collisions of the particles.
+	\item[Version 7] This version will deal with non-parallelepiped regions. I will begin by studying the class of all convex, closed, and continuously differentiable surfaces. I am unsure, but my intuition tells me that all such surfaces are topologically equivalent. Thus, any such surface should be able to be created by morphing a sphere.
+\end{description}
+
+\end{document}
