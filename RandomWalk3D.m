@@ -32,13 +32,31 @@ max_coordinate = 100;
 
 % Set the initial coordinates for the particle.
 
-x = randi([0 max_coordinate]);
-y = randi([0 max_coordinate]);
-z = randi([0 max_coordinate]);
+x_0 = randi([0 max_coordinate]);
+y_0 = randi([0 max_coordinate]);
+z_0 = randi([0 max_coordinate]);
+
+% Set up vectors that record the coordinates of the points.
+
+u = zeros(1, 1); % This vector will record the x coordinates.
+v = zeros(1, 1); % This vector will record the y coordinates.
+w = zeros(1, 1); % This vector will record the z coordinates.
+
+% Set the initial elements of u, v, and w.
+
+u(1) = x_0;
+v(1) = y_0;
+w(1) = z_0;
 
 % Display the initial coordinates.
 
-disp([x y z]);
+disp([x_0 y_0 z_0]);
+
+% Push the initial coordinates into generic variable names.
+
+x = x_0;
+y = y_0;
+z = z_0;
 
 % Set the list of possible directions.
 
@@ -66,6 +84,12 @@ while z > 0
         x = x + velocity * cos((pi / 2) * dir);
         y = y + velocity * sin((pi / 2) * dir);
         
+        % Update u, v, and w.
+        
+        u = [u x];
+        v = [v y];
+        w = [w z];
+        
         % Update the timer.
         
         steps = steps + 1;
@@ -82,6 +106,12 @@ while z > 0
         
         z = z + velocity * cos(pi * (dir - 5));
         
+        % Update u, v, and w.
+        
+        u = [u x];
+        v = [v y];
+        w = [w z];
+        
         % Update the timer.
         
         steps = steps + 1;
@@ -94,4 +124,23 @@ while z > 0
     
 end
 
+disp([x_0 y_0 z_0]);
 disp(steps);
+
+% The following code will illustrate the random walk process created above.
+
+figure
+hold on % This line will keep MATLAB from opening multiple windows
+%axis([0 region_width 0 region_height])
+for k = 1:length(u)
+    p = plot3(u(k), v(k), w(k), 'o', 'MarkerFaceColor', 'black'); % This will plot
+    % the most recent point as black, which will allow us to track the
+    % position or the particle over time.
+    drawnow % Forces MATLAB to draw the object described in the previous
+    % line.
+    p.MarkerFaceColor = 'yellow'; % Changes the colour of the point to
+    % yellow. It will allow us to see the current position of the particle
+    % relative to all the previous positions of the particle.
+    drawnow
+end
+hold off
