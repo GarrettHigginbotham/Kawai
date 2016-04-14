@@ -124,23 +124,12 @@ while z > 0
     
 end
 
+% Displays the initial position and number of steps for reference.
+
 disp([x_0 y_0 z_0]);
 disp(steps);
 
-% The following code will illustrate the random walk process created above.
+% Plots the position of the particle over time.
 
 figure
-hold on % This line will keep MATLAB from opening multiple windows
-%axis([0 region_width 0 region_height])
-for k = 1:length(u)
-    p = plot3(u(k), v(k), w(k), 'o', 'MarkerFaceColor', 'black'); % This will plot
-    % the most recent point as black, which will allow us to track the
-    % position or the particle over time.
-    drawnow % Forces MATLAB to draw the object described in the previous
-    % line.
-    p.MarkerFaceColor = 'yellow'; % Changes the colour of the point to
-    % yellow. It will allow us to see the current position of the particle
-    % relative to all the previous positions of the particle.
-    drawnow
-end
-hold off
+plot3(u, v, w, 'bo-')
